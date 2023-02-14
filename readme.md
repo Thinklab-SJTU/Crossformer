@@ -61,10 +61,28 @@ bash scripts/Traffic.sh
 
 
 ## Custom Usage
-TBD
+We use the [AirQuality](https://archive.ics.uci.edu/ml/machine-learning-databases/00360/AirQualityUCI.zip) dataset to show how to train and evaluate Crossformer with your own data. 
 
-## Usage
-`main_crossformer` is the entry point of our model. Here we describe its arguments in detail:
+1. Modify the `AirQualityUCI.csv` dataset into the following format, where the first column is date (or you can just leave the first column blank) and the other 13 columns are multivariate time series to forecast. And put the modified file into folder `datasets/`
+<p align="center">
+<img src=".\pic\Data_format.PNG" height = "120" alt="" align=center />
+<br>
+<b>Figure 4.</b> An example of the custom dataset.
+</p>
+
+2. This is an hourly-sampled dataset with 13 dimensions. And we are going to use the past week (168 hours) to forecast the next day (24 hour) and the segment length is set to 6. Therefore, we need to run:
+```
+python main_crossformer.py --data AirQuality --data_path AirQualityUCI.csv --data_dim 13 --in_len 168 --out_len 24 --seg_len 6
+```
+
+3. We can evaluate the trained model by running:
+```
+python eval_crossformer.py --setting_name Crossformer_AirQuality_il168_ol24_sl6_win2_fa10_dm256_nh4_el3_itr0 --save_pred
+```
+The model will be evaluated, predicted and ground truth series will be saved in `results/Crossformer_AirQuality_il168_ol24_sl6_win2_fa10_dm256_nh4_el3_itr0`
+
+
+`main_crossformer` is the entry point of our model and there are other parameters that can be tuned. Here we describe them in detail:
 | Parameter name | Description of parameter |
 | --- | --- |
 | data           | The dataset name                                             |
@@ -95,3 +113,20 @@ TBD
 | gpu | The gpu no, used for training and inference (defaults to 0) |
 | use_multi_gpu | Whether to use multiple gpus (defaults to `False`) |
 | devices | Device ids of multile gpus (defaults to `0,1,2,3`) |
+
+## Acknowledgement
+We appreciate the following works for their valuable code and data for time series forecasting:
+
+https://github.com/zhouhaoyi/Informer2020
+
+https://github.com/thuml/Autoformer
+
+https://github.com/alipay/Pyraformer
+
+https://github.com/MAZiqing/FEDformer
+
+The following two Vision Transformer works also inspire our TSA and HED designs:
+
+https://github.com/google-research/vision_transformer
+
+https://github.com/microsoft/Swin-Transformer
