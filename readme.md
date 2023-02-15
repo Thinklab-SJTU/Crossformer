@@ -89,7 +89,7 @@ The model will be evaluated, predicted and ground truth series will be saved in 
 | root_path      | The root path of the data file (defaults to `./datasets/`)    |
 | data_path      | The data file name (defaults to `ETTh1.csv`)                  |
 | data_split | Train/Val/Test split, can be ratio (e.g. `0.7,0.1,0.2`) or number (e.g. `16800,2880,2880`), (defaults to `0.7,0.1,0.2`) 
-| checkpoints    | Location of to store the trained model (defaults to `./checkpoints/`)  |
+| checkpoints    | Location to store the trained model (defaults to `./checkpoints/`)  |
 | in_len | Length of input/history sequence, i.e. $T$ in the paper (defaults to 96) |
 | out_len | Length of output/future sequence, i.e. $\tau$ in the paper (defaults to 24) |
 | seg_len | Length of each segment in DSW embedding, i.e. $L_{seg}$ in the paper (defaults to 6) |
@@ -114,6 +114,19 @@ The model will be evaluated, predicted and ground truth series will be saved in 
 | use_multi_gpu | Whether to use multiple gpus (defaults to `False`) |
 | devices | Device ids of multile gpus (defaults to `0,1,2,3`) |
 
+## Citation
+If you find this repository useful in your research, please cite:
+```
+@inproceedings{
+zhang2023crossformer,
+title={Crossformer: Transformer Utilizing Cross-Dimension Dependency for Multivariate Time Series Forecasting},
+author={Yunhao Zhang and Junchi Yan},
+booktitle={International Conference on Learning Representations},
+year={2023},
+}
+```
+
+
 ## Acknowledgement
 We appreciate the following works for their valuable code and data for time series forecasting:
 
@@ -125,7 +138,7 @@ https://github.com/alipay/Pyraformer
 
 https://github.com/MAZiqing/FEDformer
 
-The following two Vision Transformer works also inspire our TSA and HED designs:
+The following two Vision Transformer works also inspire our DSW embedding and HED designs:
 
 https://github.com/google-research/vision_transformer
 
