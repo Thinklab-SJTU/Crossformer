@@ -13,7 +13,7 @@ warnings.filterwarnings('ignore')
 class Dataset_MTS(Dataset):
     def __init__(self, root_path, data_path='ETTh1.csv', flag='train', size=None, 
                   data_split = [0.7, 0.1, 0.2], scale=True, scale_statistic=None):
-        # size [seq_len, label_len, pred_len]
+        # size [input length, output length]
         # info
         self.in_len = size[0]
         self.out_len = size[1]
@@ -69,8 +69,8 @@ class Dataset_MTS(Dataset):
         r_begin = s_end
         r_end = r_begin + self.out_len
 
-        seq_x = self.data_x[s_begin:s_end]
-        seq_y = self.data_y[r_begin:r_end]
+        seq_x = self.data_x[s_begin:s_end] # index ~ index+input_length
+        seq_y = self.data_y[r_begin:r_end] # index+input_length ~ index+input_length+output_length
 
         return seq_x, seq_y
     
