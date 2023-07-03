@@ -25,7 +25,7 @@ class Crossformer(nn.Module):
 
         self.device = device
 
-        # The padding operation to handle invisible sgemnet length
+        # The padding operation to handle invisible segment length
         self.pad_in_len = ceil(1.0 * in_len / seg_len) * seg_len
         self.pad_out_len = ceil(1.0 * out_len / seg_len) * seg_len
         self.in_len_add = self.pad_in_len - self.in_len
