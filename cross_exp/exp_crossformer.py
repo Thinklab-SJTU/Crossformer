@@ -190,7 +190,8 @@ class Exp_crossformer(Exp_Basic):
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
-        mae, mse, rmse, mape, mspe = metrics_mean
+        mae, mse, _, mape, mspe = metrics_mean
+        rmse = np.sqrt(mse)
         print('mse:{}, mae:{}'.format(mse, mae))
 
         np.save(folder_path+'metrics.npy', np.array([mae, mse, rmse, mape, mspe]))
@@ -261,7 +262,8 @@ class Exp_crossformer(Exp_Basic):
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
-        mae, mse, rmse, mape, mspe = metrics_mean
+        mae, mse, _, mape, mspe = metrics_mean
+        rmse = np.sqrt(mse)
         print('mse:{}, mae:{}'.format(mse, mae))
 
         np.save(folder_path+'metrics.npy', np.array([mae, mse, rmse, mape, mspe]))
